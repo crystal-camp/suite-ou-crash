@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#111318" />
+  <title>Suite ou Crash ?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div><span class="logo">💥</span><b>SUITE OU CRASH ?</b></div>
+      <div id="connectionBadge" class="badge">Hors partie</div>
+    </header>
+
+    <section id="home" class="screen active">
+      <div class="hero card">
+        <div class="eyebrow">JEU D'IMPRO MULTIJOUEUR</div>
+        <h1>L'histoire s'arrête.<br><span>À vous de la ruiner.</span></h1>
+        <p>Une amorce, une coupure brutale, puis chacun invente sa suite. On révèle tout et on vote pour la meilleure.</p>
+        <div class="grid2">
+          <button id="hostBtn" class="primary big">Créer une partie</button>
+          <button id="joinOpenBtn" class="secondary big">Rejoindre</button>
+        </div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini card"><b>🧠 Anti-page blanche</b><span>Un indice aléatoire quand ton cerveau abandonne.</span></div>
+        <div class="mini card"><b>🚨 Panique</b><span>Une contrainte absurde quand le chrono devient méchant.</span></div>
+        <div class="mini card"><b>🗳️ Vote secret</b><span>Les réponses sont anonymes jusqu'au résultat.</span></div>
+      </div>
+    </section>
+
+    <section id="profile" class="screen">
+      <div class="card narrow">
+        <div class="eyebrow">TON IDENTITÉ HAUTEMENT SÉRIEUSE</div>
+        <h2>Qui ose entrer ?</h2>
+        <div id="avatarPreview" class="avatar giant">🦆</div>
+        <button id="rerollAvatar" class="ghost">🎲 Autre emoji</button>
+        <label>Pseudo<input id="nickname" maxlength="18" placeholder="Ex : GérardDu93" autocomplete="off"></label>
+        <div id="joinFields" class="hidden"><label>Code de partie<input id="roomCode" maxlength="24" placeholder="ABC123" autocomplete="off"></label></div>
+        <button id="profileContinue" class="primary big">Continuer</button>
+        <button class="back ghost">Retour</button>
+      </div>
+    </section>
+
+    <section id="lobby" class="screen">
+      <div class="card">
+        <div class="lobby-head">
+          <div><div class="eyebrow">SALLE D'ATTENTE</div><h2>Partie <span id="roomLabel"></span></h2></div>
+          <button id="copyCode" class="secondary">Copier le code</button>
+        </div>
+        <p class="muted">La partie vit uniquement dans les navigateurs. Si l'hôte ferme/actualise sa page, la partie s'arrête.</p>
+        <div id="players" class="players"></div>
+        <div id="hostControls" class="hidden host-controls">
+          <label>Temps d'écriture <select id="writeTime"><option value="45">45 s</option><option value="60" selected>60 s</option><option value="90">90 s</option><option value="120">120 s</option></select></label>
+          <label>Manches <select id="roundCount"><option>3</option><option selected>5</option><option>7</option><option>10</option></select></label>
+          <button id="startBtn" class="primary big">Lancer le chaos</button>
+        </div>
+        <div id="guestWaiting" class="notice hidden">En attente que l'hôte lance la partie…</div>
+      </div>
+    </section>
+
+    <section id="game" class="screen">
+      <div class="game-head"><div><span id="roundLabel" class="badge"></span></div><div id="timer" class="timer">60</div></div>
+      <article class="prompt card"><div class="eyebrow">L'AMORCE</div><p id="promptText"></p></article>
+      <div id="writePanel" class="card">
+        <textarea id="answer" maxlength="650" placeholder="Écris la suite. Aucun tribunal ne sera prévenu."></textarea>
+        <div class="actions">
+          <button id="hintBtn" class="secondary">🧠 J'ai aucune idée</button>
+          <button id="panicBtn" class="danger">🚨 PANIQUE</button>
+          <button id="submitBtn" class="primary">Valider ma suite</button>
+        </div>
+        <div id="inspiration" class="inspiration hidden"></div>
+        <div id="submittedState" class="notice hidden">Réponse envoyée. Regarde les autres souffrir.</div>
+      </div>
+      <div id="waitingAnswers" class="card hidden"><h3>Réponses reçues</h3><div id="answerProgress"></div></div>
+    </section>
+
+    <section id="vote" class="screen">
+      <div class="eyebrow">LE TRIBUNAL DU MAUVAIS GOÛT</div>
+      <h2>Vote pour ta suite préférée</h2>
+      <p id="votePrompt" class="quote"></p>
+      <div id="answerCards" class="answer-cards"></div>
+    </section>
+
+    <section id="results" class="screen">
+      <div class="card"><div class="eyebrow">RÉSULTATS</div><h2 id="winnerTitle">Le peuple a parlé.</h2><div id="resultCards" class="answer-cards"></div><button id="nextRoundBtn" class="primary big hidden">Manche suivante</button><div id="guestNext" class="notice hidden">En attente de l'hôte…</div></div>
+    </section>
+
+    <section id="final" class="screen"><div class="card"><div class="eyebrow">FIN DE PARTIE</div><h1>Le classement du chaos</h1><div id="leaderboard"></div><button id="restartBtn" class="primary big hidden">Rejouer avec ce groupe</button></div></section>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
